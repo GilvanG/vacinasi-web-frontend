@@ -1,5 +1,4 @@
 {
-  "parser": "babel-eslint",
   "env": {
     "browser": true,
     "es2021": true,
@@ -7,6 +6,7 @@
   },
   "extends": ["plugin:react/recommended", "airbnb"],
   "parserOptions": {
+    "parser": "babel-eslint",
     "ecmaFeatures": {
       "jsx": true
     },
@@ -21,6 +21,7 @@
         "extensions": [".js", ".jsx"]
       }
     ],
+    "react/jsx-props-no-spreading": "off",
     "global-require": "off",
     "import/prefer-default-export": "off",
     "no-unused-expressions": ["error", { "allowTaggedTemplates": true }]
