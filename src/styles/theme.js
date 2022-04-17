@@ -16,7 +16,11 @@ export const theme = extendTheme({
     },
     green: {
       900: '#537a5a',
+      primary: '#0ace69',
       300: '#9AE19D',
+    },
+    white: {
+      primary: '#ebffec',
     },
   },
   fonts: {
