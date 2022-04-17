@@ -1,10 +1,11 @@
 import React from 'react';
 import {
-  Flex, useBreakpointValue, IconButton, Icon, Text,
+  Flex, useBreakpointValue, IconButton, Icon,
 } from '@chakra-ui/react';
 import { RiMenuLine } from 'react-icons/ri';
 
 import { useSidebarDrawer } from '../../contexts/SidebarDrawer';
+import { Logo } from './Logo';
 
 export function Header() {
   const { onOpen } = useSidebarDrawer();
@@ -43,14 +44,7 @@ export function Header() {
         maxWidth={1480}
         h="20"
       >
-        <Text
-          fontSize={['2xl', '4xl']}
-          fontWeight="bold"
-          color="green.900"
-          w="128"
-        >
-          VACINASI
-        </Text>
+        <Logo />
       </Flex>
     </Flex>
   );
