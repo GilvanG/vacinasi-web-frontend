@@ -29,7 +29,7 @@ function InputBase({
 
       {!!error && (
         <FormErrorMessage>
-          {error.message}
+          {error}
         </FormErrorMessage>
       )}
     </FormControl>
