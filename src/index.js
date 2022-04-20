@@ -10,12 +10,12 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
-    <ChakraProvider resetCSS theme={theme}>
-      <SidebarDrawerProvider>
-        <FormikProvider>
+    <FormikProvider>
+      <ChakraProvider resetCSS theme={theme}>
+        <SidebarDrawerProvider>
           <Router />
-        </FormikProvider>
-      </SidebarDrawerProvider>
-    </ChakraProvider>
+        </SidebarDrawerProvider>
+      </ChakraProvider>
+    </FormikProvider>
   </React.StrictMode>,
 );

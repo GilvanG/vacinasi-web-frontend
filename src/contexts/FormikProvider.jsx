@@ -1,11 +1,12 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import * as yup from 'yup';
 import moment from 'moment';
-import { Formik } from 'formik';
+import { Formik, useFormikContext, useField } from 'formik';
 import { api } from '../services/api';
 
-async function createSchedule({ name, birthDate, schedule }, callbackActions = () => { }) {
+export async function createSchedule({ name, birthDate, schedule }, callbackActions = () => { }) {
   try {
     const { status, data } = await api.post('', {
       dayHourSchedule: schedule,
@@ -18,12 +19,13 @@ async function createSchedule({ name, birthDate, schedule }, callbackActions = (
     return { error };
   }
 }
+
+export const createScheduleFormSchema = yup.object().shape({
+  name: yup.string().required('Infome o Nome Completo do Paciente'),
+  birthDate: yup.date('Data inválida').required('Infome a Data de Nascimento do Paciente'),
+  schedule: yup.date('Horário inválido').required('Infome um Horário de Agendamento'),
+});
 export function FormikProvider({ children }) {
-  const createScheduleFormSchema = yup.object().shape({
-    name: yup.string().required('Infome o Nome Completo do Paciente'),
-    birthDate: yup.date('Data inválida').required('Infome a Data de Nascimento do Paciente'),
-    schedule: yup.date('Horário inválido').required('Infome um Horário de Agendamento'),
-  });
   return (
     <Formik
       initialValues={{
@@ -57,4 +59,14 @@ export function FormikProvider({ children }) {
       {children}
     </Formik>
   );
+}
+
+export function useFormik() {
+  const [field] = useField();
+  const {
+    errors, handleSubmit, handleChange, values, setFieldValue,
+  } = useFormikContext();
+  return {
+    field, errors, handleSubmit, handleChange, values, setFieldValue,
+  };
 }

@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useFormikContext, useField } from 'formik';
 import {
-  Flex, SimpleGrid, Box, Heading, VStack, Divider, Button, HStack, FormErrorMessage, FormControl,
+  Flex, SimpleGrid, Box, Heading, VStack, Divider, Button,
+  HStack, FormErrorMessage, FormControl,
 } from '@chakra-ui/react';
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -12,10 +12,12 @@ import { Sidebar } from './components/Sidebar';
 import { Input } from './components/Form/Input';
 import { InputDate } from './components/Form/Input/InputDate';
 import { InputDateTime } from './components/Form/Input/InputDateTime';
+import { useFormik } from './contexts/FormikProvider';
 
 function App() {
-  const [field] = useField();
-  const { errors, ...formik } = useFormikContext();
+  const {
+    field, errors, handleSubmit, handleChange, values, setFieldValue,
+  } = useFormik();
   return (
     <Flex direction="column" h="108vh">
       <Header />
@@ -27,7 +29,7 @@ function App() {
           p={['6', '8']}
           bg="gray.800"
           borderRadius={8}
-          onSubmit={formik.handleSubmit}
+          onSubmit={handleSubmit}
         >
           <Heading size="lg" fontWeight="normal">Criar Agendamento</Heading>
 
@@ -46,15 +48,15 @@ function App() {
               <Input
                 name="name"
                 label="Nome Completo"
-                onChange={formik.handleChange}
-                value={formik.values.name}
+                onChange={handleChange}
+                value={values.name}
                 error={errors?.name}
               />
               <InputDate
                 name="birthDate"
                 label="Data de Nascimento"
                 value={field.value.birthDate}
-                onChange={(val) => formik.setFieldValue('birthDate', val)}
+                onChange={(val) => setFieldValue('birthDate', val)}
                 maxDate={new Date()}
                 error={errors?.birthDate}
               />
@@ -76,7 +78,7 @@ function App() {
                 name="schedule"
                 label="Horário"
                 value={field.value.schedule}
-                onChange={(val) => formik.setFieldValue('schedule', val)}
+                onChange={(val) => setFieldValue('schedule', val)}
                 minDate={new Date()}
                 error={errors?.schedule}
               />
