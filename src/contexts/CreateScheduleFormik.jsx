@@ -25,7 +25,7 @@ export const createScheduleFormSchema = yup.object().shape({
   birthDate: yup.date('Data inválida').required('Infome a Data de Nascimento do Paciente'),
   schedule: yup.date('Horário inválido').required('Infome um Horário de Agendamento'),
 });
-export function FormikProvider({ children }) {
+export function FormCreateProvider({ children }) {
   return (
     <Formik
       initialValues={{
@@ -61,7 +61,7 @@ export function FormikProvider({ children }) {
   );
 }
 
-export function useFormik() {
+export function useFormCreate() {
   const [field] = useField();
   const {
     errors, handleSubmit, handleChange, values, setFieldValue,

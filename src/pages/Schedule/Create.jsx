@@ -10,12 +10,12 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { Input } from '../../components/Form/Input';
 import { InputDate } from '../../components/Form/Input/InputDate';
 import { InputDateTime } from '../../components/Form/Input/InputDateTime';
-import { useFormik } from '../../contexts/FormikProvider';
+import { useFormCreate } from '../../contexts/CreateScheduleFormik';
 
 function CreateSchedule() {
   const {
     field, errors, handleSubmit, handleChange, values, setFieldValue,
-  } = useFormik();
+  } = useFormCreate();
   return (
     <Box
       as="form"

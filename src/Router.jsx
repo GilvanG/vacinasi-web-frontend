@@ -1,16 +1,24 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import App from './App';
 import { Layout } from './components/Layout';
+import ListSchedule from './pages/Schedule/List';
 import CreateSchedule from './pages/Schedule/Create';
+import { FormCreateProvider } from './contexts/CreateScheduleFormik';
 
 function Router() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route element={<CreateSchedule />} index />
-          <Route element={<App />} path="schedules" />
+          <Route
+            element={(
+              <FormCreateProvider>
+                <CreateSchedule />
+              </FormCreateProvider>
+            )}
+            index
+          />
+          <Route element={<ListSchedule />} path="schedules" />
         </Route>
       </Routes>
     </BrowserRouter>
