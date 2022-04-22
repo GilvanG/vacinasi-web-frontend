@@ -18,6 +18,8 @@ root.render(
           <Router />
         </SidebarDrawerProvider>
       </ChakraProvider>
+      {/* Sim, eu sei que o ReactQueryDevtools não deveria estar ativo na main.
+      Mantive ele aqui para facilitar a observação dos fetchings. */}
       <ReactQueryDevtools />
     </QueryClientProvider>
   </React.StrictMode>,
