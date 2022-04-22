@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Flex, SimpleGrid, Box, Heading, VStack, Divider, Button,
-  HStack, FormErrorMessage, FormControl,
+  HStack, FormErrorMessage, FormControl, useToast,
 } from '@chakra-ui/react';
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -14,8 +14,25 @@ import { useFormCreate } from '../../contexts/CreateScheduleFormik';
 
 function CreateSchedule() {
   const {
-    field, errors, handleSubmit, handleChange, values, setFieldValue,
+    field, errors, handleSubmit, handleChange, values, setFieldValue, status, setStatus,
   } = useFormCreate();
+  const toast = useToast();
+  useEffect(
+    () => {
+      if (status === 'submitting-success') {
+        setStatus();
+        toast({
+          id: 'success-token',
+          status: 'success',
+          isClosable: true,
+          position: 'bottom-right',
+          duration: 5000,
+          description: 'Agendamento criado com sucesso!',
+        });
+      }
+    },
+    [status, toast.isActive('success-token')],
+  );
   return (
     <Box
       as="form"
@@ -25,6 +42,17 @@ function CreateSchedule() {
       borderRadius={8}
       onSubmit={handleSubmit}
     >
+      {/* {status === 'submitting-success'
+        && !toast.isActive('success-token')
+        && toast({
+          id: 'success-token',
+          status: 'success',
+          isClosable: true,
+          position: 'bottom-right',
+          duration: 5000,
+          description: 'Agendamento criado com sucesso!',
+        })} */}
+
       <Heading size="lg" fontWeight="normal">Criar Agendamento</Heading>
 
       <Divider my="6" borderColor="gray.700" />

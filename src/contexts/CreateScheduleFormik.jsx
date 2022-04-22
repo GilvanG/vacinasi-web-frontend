@@ -25,6 +25,7 @@ export const createScheduleFormSchema = yup.object().shape({
   birthDate: yup.date('Data inválida').required('Infome a Data de Nascimento do Paciente'),
   schedule: yup.date('Horário inválido').required('Infome um Horário de Agendamento'),
 });
+
 export function FormCreateProvider({ children }) {
   return (
     <Formik
@@ -51,6 +52,9 @@ export function FormCreateProvider({ children }) {
             if (parseInt(status, 10) >= 300) {
               actions.setSubmitting(false);
               actions.setErrors({ others: data });
+            } else {
+              actions.setStatus('submitting-success');
+              // document.location.reload(true);
             }
           });
         }
@@ -64,9 +68,9 @@ export function FormCreateProvider({ children }) {
 export function useFormCreate() {
   const [field] = useField();
   const {
-    errors, handleSubmit, handleChange, values, setFieldValue,
+    errors, handleSubmit, handleChange, values, setFieldValue, status, setStatus,
   } = useFormikContext();
   return {
-    field, errors, handleSubmit, handleChange, values, setFieldValue,
+    field, errors, handleSubmit, handleChange, values, setFieldValue, status, setStatus,
   };
 }
