@@ -66,7 +66,17 @@ export function FormCreateProvider({ children }) {
 }
 
 export function useFormCreate() {
-  const [field] = useField();
+  const [name] = useField({ name: 'name' });
+  const [birthDate] = useField({ name: 'birthDate' });
+  const [schedule] = useField({ name: 'schedule' });
+  const field = {
+    value: {
+      name: name.value,
+      birthDate: birthDate.value,
+      schedule: schedule.value,
+    },
+  };
+
   const {
     errors, handleSubmit, handleChange, values, setFieldValue, status, setStatus,
   } = useFormikContext();

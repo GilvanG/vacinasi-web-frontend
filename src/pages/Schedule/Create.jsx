@@ -33,6 +33,17 @@ function CreateSchedule() {
     },
     [status, toast.isActive('success-token')],
   );
+  useEffect(() => {
+    if (localStorage.getItem('birthDate')) {
+      setFieldValue('birthDate', new Date(parseInt(localStorage.getItem('birthDate'), 10)));
+    }
+    if (localStorage.getItem('schedule')) {
+      setFieldValue('schedule', new Date(parseInt(localStorage.getItem('schedule'), 10)));
+    }
+    if (localStorage.getItem('name')) {
+      setFieldValue('name', localStorage.getItem('name'));
+    }
+  }, []);
   return (
     <Box
       as="form"
@@ -42,16 +53,6 @@ function CreateSchedule() {
       borderRadius={8}
       onSubmit={handleSubmit}
     >
-      {/* {status === 'submitting-success'
-        && !toast.isActive('success-token')
-        && toast({
-          id: 'success-token',
-          status: 'success',
-          isClosable: true,
-          position: 'bottom-right',
-          duration: 5000,
-          description: 'Agendamento criado com sucesso!',
-        })} */}
 
       <Heading size="lg" fontWeight="normal">Criar Agendamento</Heading>
 
@@ -70,7 +71,10 @@ function CreateSchedule() {
           <Input
             name="name"
             label="Nome Completo"
-            onChange={handleChange}
+            onChange={(val) => {
+              handleChange(val);
+              localStorage.setItem('name', val.target.value);
+            }}
             value={values.name}
             error={errors?.name}
           />
@@ -78,7 +82,10 @@ function CreateSchedule() {
             name="birthDate"
             label="Data de Nascimento"
             value={field.value.birthDate}
-            onChange={(val) => setFieldValue('birthDate', val)}
+            onChange={(val) => {
+              setFieldValue('birthDate', val);
+              localStorage.setItem('birthDate', val.getTime());
+            }}
             maxDate={new Date()}
             error={errors?.birthDate}
           />
@@ -100,7 +107,10 @@ function CreateSchedule() {
             name="schedule"
             label="Horário"
             value={field.value.schedule}
-            onChange={(val) => setFieldValue('schedule', val)}
+            onChange={(val) => {
+              setFieldValue('schedule', val);
+              localStorage.setItem('schedule', val.getTime());
+            }}
             minDate={new Date()}
             error={errors?.schedule}
           />
