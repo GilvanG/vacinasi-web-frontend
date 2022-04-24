@@ -44,7 +44,7 @@ export function FormCreateProvider({ children }) {
           actions.setErrors({ birthDate: 'A Data do Nascimento não pode acontecer depois do dia Atual' });
         } else if (moment(new Date()).isSameOrAfter(values.schedule)) {
           actions.setSubmitting(false);
-          actions.setErrors({ schedule: 'O Horário de Agendamento não pode acontecer antes da Data Atual' });
+          actions.setErrors({ schedule: 'O Horário de Agendamento não pode acontecer antes da Data e Horaŕio Atuais' });
         } else {
           createSchedule({
             name: values.name, schedule: values.schedule, birthDate: values.birthDate,
