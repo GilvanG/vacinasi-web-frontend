@@ -38,6 +38,7 @@ horário.
 ## OBS
 
 - Algumas branchs foram fechadas, mas todo o projeto foi cronstruído utilizando o modelo do gitflow, tal fato pode ser comprovado observando todos os merges realizados.
+- Para funcionamento correto da aplicação mantenha tanto o backend quanto o frontend ativos.
 
 ## Contribuir
 
